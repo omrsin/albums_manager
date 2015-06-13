@@ -23,11 +23,14 @@ group :development, :test do
   gem 'byebug'  
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'rspec-rails'
+  gem 'guard-rspec'
 end
 
-group :test do
-  gem 'minitest-reporters', '1.0.5'
-  gem 'mini_backtrace',     '0.1.3'
-  gem 'guard-minitest',     '2.3.1'
+group :test do  
+  # gem 'minitest-reporters', '1.0.5'
+  # gem 'mini_backtrace',     '0.1.3'
+  # gem 'guard-minitest',     '2.3.1'
 end
 
