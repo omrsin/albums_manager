@@ -64,10 +64,9 @@ RSpec.describe UsersController, type: :controller do
 
 			before(:each) do
 				@attr = { name: "Example User", email: "user@example.com", password: "mypassword", password_confirmation: "mypassword" }
-				@user = User.new(name: "Example User", email: "user@example.com", password: "mypassword", password_confirmation: "mypassword")
+				@user = User.new(id: 1, name: "Example User", email: "user@example.com", password: "mypassword", password_confirmation: "mypassword")
 				user_double = class_double("User").as_stubbed_const(:transfer_nested_constants => true)			
-				allow(user_double).to receive(:new).and_return(@user)
-				allow(@user).to receive(:save).and_return(true)				
+				allow(user_double).to receive(:new).and_return(@user)				
 			end
 
 			it "should redirect to the user's page" do
