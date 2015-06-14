@@ -7,15 +7,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <%= link_to "Albums Manager", root_path, class: "navbar-brand" %>
-            <!-- <a class="navbar-brand" href="#">Albums Manager</a> -->
+            <%= link_to "Albums Manager", root_path, class: "navbar-brand" %>            
         </div>
         <% if logged_in? %>        
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Albums</a>
-                    </li>                    
+                    <li><%= link_to "Albums", albums_path %></li>
+                    <li><%= link_to "Profile", user_path(current_user) %></li>                    
                 </ul>
             
                 <ul class="nav navbar-nav navbar-right">

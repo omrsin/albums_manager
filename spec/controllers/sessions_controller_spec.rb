@@ -75,9 +75,9 @@ RSpec.describe SessionsController, type: :controller do
 		        expect(controller).to be_logged_in
 		   end
 		      
-		      it "should redirect to the user show page" do
+		      it "should redirect to the user's albums page" do
 		        post :create, :session => @attr
-		        expect(response).to redirect_to(user_path(@user))		        
+		        expect(response).to redirect_to(albums_path)		        
 		   end
 		end
 	end

@@ -2,21 +2,21 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
 
-	describe "GET /users" do
+	describe "POST /user" do
 
 		describe "sign up form" do
 
 			describe "failure" do
 
 				it "should not create a new user" do
-				  visit new_user_path
-				  expect(page).to have_http_status(200)
-				  
-				  expect {
-				  	click_button("Create my account")				  	
-				  }.to_not change(User, :count)
+					visit new_user_path
+					expect(page).to have_http_status(200)
 
-				  expect(page).to have_selector('div', text: 'The form contains')
+					expect {
+						click_button("Create my account")				  	
+					}.to_not change(User, :count)
+
+					expect(page).to have_selector('div', text: 'The form contains')
 
 				end
 			end

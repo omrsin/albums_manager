@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
 
 	it { should respond_to(:name) }
 	it { should respond_to(:email) }
+	it { should respond_to(:albums) }
 
 	it "should create a new user in the database" do
 		@user.save

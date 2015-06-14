@@ -1,0 +1,13 @@
+<h1>Add a new album</h1>
+<%= form_for(@album) do |f| %>	
+	<div class="form-group">
+		<%= f.label :name %>
+    	<%= f.text_field :name, class: "form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.label :artist %>
+    	<%= f.text_field :artist, class: "form-control" %>		
+	</div>	
+	
+	<%= f.submit "Add", class: "btn btn-primary" %>
+<% end %>

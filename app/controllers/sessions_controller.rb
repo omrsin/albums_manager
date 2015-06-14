@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   	user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
     	log_in(user)
-    	redirect_to user_path(user)
+    	redirect_to albums_path
 	else
   		@invalid_credentials = "Invalid credentials"
 		render 'new'		
