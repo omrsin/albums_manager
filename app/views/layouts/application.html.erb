@@ -20,9 +20,13 @@
         <div class="row">
             <div class="col-lg-12">
 
-			<%= yield %>
+	            <% flash.each do |key, value| %>
+			        <p class="flash-alert bg-danger alert-<%= key %> flash-margin"><%= value %></p>
+			    <% end %>
 
-			<%= debug(params) if Rails.env.development? %>
+				<%= yield %>
+
+				<%= debug(params) if Rails.env.development? %>
 
 			</div>
         </div>

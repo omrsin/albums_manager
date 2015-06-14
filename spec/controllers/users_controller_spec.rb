@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
 	render_views
 
-	describe "GET #new" do
+	describe "GET #new" do	
 
 		it "returns http success" do
 			get :new
@@ -20,8 +20,10 @@ RSpec.describe UsersController, type: :controller do
 
 		before(:each) do
 			@user = User.create!(name: "Example User", email: "user@example.com", password: "mypassword", password_confirmation: "mypassword")			
-			user_double = class_double("User").as_stubbed_const(:transfer_nested_constants => true)			
-			allow(user_double).to receive(:find).with("#{@user.id}").and_return(@user)			
+			user_double = class_double("User").as_stubbed_const(:transfer_nested_constants => true)
+			allow(user_double).to receive(:find).with("#{@user.id}").and_return(@user)
+			allow(user_double).to receive(:find_by).with(id: nil).and_return(nil)
+			test_sign_in(@user)			
 		end
 
 		it "should be successful" do			
@@ -44,6 +46,7 @@ RSpec.describe UsersController, type: :controller do
 				@user = User.new(name: "", email: "", password: "", password_confirmation: "")				
 				user_double = class_double("User").as_stubbed_const(:transfer_nested_constants => true)			
 				allow(user_double).to receive(:new).and_return(@user)
+				allow(user_double).to receive(:find_by).with(id: nil).and_return(nil)
 				allow(@user).to receive(:save).and_return(false)
 				allow(@user.errors).to receive(:any?).and_return(true)
 			end
@@ -66,7 +69,13 @@ RSpec.describe UsersController, type: :controller do
 				@attr = { name: "Example User", email: "user@example.com", password: "mypassword", password_confirmation: "mypassword" }
 				@user = User.new(id: 1, name: "Example User", email: "user@example.com", password: "mypassword", password_confirmation: "mypassword")
 				user_double = class_double("User").as_stubbed_const(:transfer_nested_constants => true)			
-				allow(user_double).to receive(:new).and_return(@user)				
+				allow(user_double).to receive(:new).and_return(@user)
+				allow(user_double).to receive(:find_by).with(id: @user.id).and_return(@user)			
+			end
+
+			it "should log in the user" do
+				post :create, :user => @attr
+				expect(controller).to be_logged_in
 			end
 
 			it "should redirect to the user's page" do
